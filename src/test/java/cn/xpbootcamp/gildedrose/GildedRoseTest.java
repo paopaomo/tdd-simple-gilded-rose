@@ -18,4 +18,11 @@ public class GildedRoseTest {
         goods.updateGoods();
         Assert.assertEquals(19, goods.getUpdatedQuality());
     }
+
+    @Test
+    public void should_reduce_the_value_of_the_normal_goods_by_2_that_are_not_within_the_validity_period() {
+        GildedRose goods = new GildedRose(GoodsType.NORMAL, 20, -1);
+        goods.updateGoods();
+        Assert.assertEquals(18, goods.getUpdatedQuality());
+    }
 }

@@ -30,6 +30,8 @@ public class GildedRose {
     private void updateNormalGoods() {
         if(sellIn >= 0) {
             quality -= 1;
+        } else {
+            quality -= 2;
         }
     }
 
