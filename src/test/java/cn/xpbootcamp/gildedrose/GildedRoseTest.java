@@ -39,4 +39,11 @@ public class GildedRoseTest {
         goods.updateGoods();
         Assert.assertEquals(23, goods.getUpdatedQuality());
     }
+
+    @Test
+    public void should_the_value_of_the_backstage_pass_is_0_that_the_show_is_over() {
+        GildedRose goods = new GildedRose(GoodsType.BACKSTAGE_PASS, 20, -3);
+        goods.updateGoods();
+        Assert.assertEquals(0, goods.getUpdatedQuality());
+    }
 }

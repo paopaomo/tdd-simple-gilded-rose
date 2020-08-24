@@ -28,6 +28,8 @@ public class GildedRose {
             quality += 2;
         } else if(sellIn > 0 && sellIn < 5) {
             quality += 3;
+        } else {
+            quality = 0;
         }
     }
 
