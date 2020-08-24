@@ -32,8 +32,15 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void should_increase_the_value_of_the_backstage_pass_by_2_that_more_than_ten_days_before_the_show() {
+    public void should_increase_the_value_of_the_backstage_pass_by_1_that_more_than_ten_days_before_the_show() {
         GildedRose goods = new GildedRose(GoodsType.BACKSTAGE_PASS, 20, 11);
+        goods.updateGoods();
+        Assert.assertEquals(21, goods.getUpdatedQuality());
+    }
+
+    @Test
+    public void should_increase_the_value_of_the_backstage_pass_by_2_that_less_than_ten_days_and_more_than_five_days_before_the_show() {
+        GildedRose goods = new GildedRose(GoodsType.BACKSTAGE_PASS, 20, 8);
         goods.updateGoods();
         Assert.assertEquals(22, goods.getUpdatedQuality());
     }
@@ -68,9 +75,10 @@ public class GildedRoseTest {
 
     @ParameterizedTest
     @MethodSource
-    void should_update_the_normal_goods_correctly(int sellIn, int quality,
+    void should_update_the_normal_goods_correctly(GoodsType type, int sellIn,
+                                                  int quality,
                                                   int updatedSellIn, int updatedQuality) {
-        GildedRose goods = new GildedRose(GoodsType.NORMAL, quality, sellIn);
+        GildedRose goods = new GildedRose(type, quality, sellIn);
         int num_of_days = sellIn - updatedSellIn;
         while(num_of_days > 0) {
             goods.updateGoods();
@@ -80,11 +88,20 @@ public class GildedRoseTest {
     }
     static List<Arguments> should_update_the_normal_goods_correctly() {
         return List.of(
-                Arguments.arguments(10, 20, 9, 19),
-                Arguments.arguments(2, 0, 1, 0),
-                Arguments.arguments(3, 6, 2 , 5),
-                Arguments.arguments(0, 6, -1 , 4),
-                Arguments.arguments(-1, 6, -2 , 4)
+                Arguments.arguments(GoodsType.NORMAL, 10, 20, 9, 19),
+                Arguments.arguments(GoodsType.NORMAL, 2, 0, 1, 0),
+                Arguments.arguments(GoodsType.NORMAL, 3, 6, 2 , 5),
+                Arguments.arguments(GoodsType.NORMAL, 0, 6, -1 , 4),
+                Arguments.arguments(GoodsType.NORMAL, -1, 6, -2 , 4),
+                Arguments.arguments(GoodsType.BACKSTAGE_PASS, 15, 20, 14, 21),
+                Arguments.arguments(GoodsType.BACKSTAGE_PASS, 10, 45, 9, 47),
+                Arguments.arguments(GoodsType.BACKSTAGE_PASS, 9, 45, 8, 47),
+                Arguments.arguments(GoodsType.BACKSTAGE_PASS, 10, 49, 9, 50),
+                Arguments.arguments(GoodsType.BACKSTAGE_PASS, 10, 50, 9, 50),
+                Arguments.arguments(GoodsType.BACKSTAGE_PASS, 5, 49, 4, 50),
+                Arguments.arguments(GoodsType.BACKSTAGE_PASS, 5, 45, 4, 48),
+                Arguments.arguments(GoodsType.BACKSTAGE_PASS, 1, 20, 0, 23),
+                Arguments.arguments(GoodsType.BACKSTAGE_PASS, 0, 20, -1, 0)
         );
     }
 }
