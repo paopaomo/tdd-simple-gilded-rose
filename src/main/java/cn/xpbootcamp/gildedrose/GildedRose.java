@@ -24,7 +24,9 @@ public class GildedRose {
     }
 
     private void updateBackstagePassGoods() {
-        // TODO
+        if(sellIn > 10) {
+            quality += 2;
+        }
     }
 
     private void updateNormalGoods() {

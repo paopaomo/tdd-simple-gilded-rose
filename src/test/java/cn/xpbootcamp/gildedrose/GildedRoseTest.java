@@ -25,4 +25,11 @@ public class GildedRoseTest {
         goods.updateGoods();
         Assert.assertEquals(18, goods.getUpdatedQuality());
     }
+
+    @Test
+    public void should_increase_the_value_of_the_backstage_pass_by_2_that_more_than_ten_days_before_the_show() {
+        GildedRose goods = new GildedRose(GoodsType.BACKSTAGE_PASS, 20, 11);
+        goods.updateGoods();
+        Assert.assertEquals(22, goods.getUpdatedQuality());
+    }
 }
