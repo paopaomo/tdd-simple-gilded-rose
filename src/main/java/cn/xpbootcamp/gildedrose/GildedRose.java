@@ -22,6 +22,28 @@ public class GildedRose {
     public GoodsType getGoodsType() {
         return type;
     }
+
+    private void updateBackstagePassGoods() {
+        // TODO
+    }
+
+    private void updateNormalGoods() {
+        if(sellIn >= 0) {
+            quality -= 1;
+        }
+    }
+
+    public void updateGoods() {
+        switch (type) {
+            case BACKSTAGE_PASS:
+                updateBackstagePassGoods();
+                break;
+            case NORMAL:
+            default:
+                updateNormalGoods();
+                break;
+        }
+    }
 }
 
 
