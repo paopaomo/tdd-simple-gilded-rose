@@ -26,6 +26,8 @@ public class GildedRose {
     private void updateBackstagePassGoods() {
         if(sellIn > 10) {
             quality += 2;
+        } else if(sellIn > 0 && sellIn < 5) {
+            quality += 3;
         }
     }
 
