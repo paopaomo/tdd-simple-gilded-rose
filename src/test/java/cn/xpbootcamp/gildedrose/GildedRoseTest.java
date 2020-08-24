@@ -2,6 +2,11 @@ package cn.xpbootcamp.gildedrose;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.List;
 
 public class GildedRoseTest {
     @Test
@@ -59,5 +64,27 @@ public class GildedRoseTest {
         GildedRose goods = new GildedRose(GoodsType.BACKSTAGE_PASS, 49, 2);
         goods.updateGoods();
         Assert.assertEquals(50, goods.getUpdatedQuality());
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void should_update_the_normal_goods_correctly(int sellIn, int quality,
+                                                  int updatedSellIn, int updatedQuality) {
+        GildedRose goods = new GildedRose(GoodsType.NORMAL, quality, sellIn);
+        int num_of_days = sellIn - updatedSellIn;
+        while(num_of_days > 0) {
+            goods.updateGoods();
+            num_of_days -= 1;
+        }
+        Assert.assertEquals(updatedQuality, goods.getUpdatedQuality());
+    }
+    static List<Arguments> should_update_the_normal_goods_correctly() {
+        return List.of(
+                Arguments.arguments(10, 20, 9, 19),
+                Arguments.arguments(2, 0, 1, 0),
+                Arguments.arguments(3, 6, 2 , 5),
+                Arguments.arguments(0, 6, -1 , 4),
+                Arguments.arguments(-1, 6, -2 , 4)
+        );
     }
 }

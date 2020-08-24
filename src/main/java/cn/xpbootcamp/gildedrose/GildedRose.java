@@ -44,7 +44,7 @@ public class GildedRose {
     }
 
     private void updateNormalGoods() {
-        if(sellIn >= 0) {
+        if(sellIn > 0) {
             decreasePrice(quality, 1);
         } else {
             decreasePrice(quality, 2);
