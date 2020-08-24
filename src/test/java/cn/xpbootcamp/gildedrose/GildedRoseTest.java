@@ -46,4 +46,18 @@ public class GildedRoseTest {
         goods.updateGoods();
         Assert.assertEquals(0, goods.getUpdatedQuality());
     }
+
+    @Test
+    public void should_the_minimum_of_the_goods_is_0() {
+        GildedRose goods = new GildedRose(GoodsType.NORMAL, 0, 2);
+        goods.updateGoods();
+        Assert.assertEquals(0, goods.getUpdatedQuality());
+    }
+
+    @Test
+    public void should_the_maximum_of_the_goods_is_50() {
+        GildedRose goods = new GildedRose(GoodsType.BACKSTAGE_PASS, 49, 2);
+        goods.updateGoods();
+        Assert.assertEquals(50, goods.getUpdatedQuality());
+    }
 }

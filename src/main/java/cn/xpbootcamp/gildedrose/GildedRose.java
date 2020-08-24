@@ -4,6 +4,8 @@ public class GildedRose {
     private GoodsType type;
     private int quality;
     private int sellIn;
+    final int MAX_QUALITY = 50;
+    final int MIN_QUALITY = 0;
 
     public GildedRose(GoodsType type, int quality, int sellIn) {
         this.type = type;
@@ -23,11 +25,19 @@ public class GildedRose {
         return type;
     }
 
+    private void increasePrice(int quality, int diff) {
+        this.quality = Math.min(quality + diff, MAX_QUALITY);
+    }
+
+    private void decreasePrice(int quality, int diff) {
+        this.quality = Math.max(quality - diff, MIN_QUALITY);
+    }
+
     private void updateBackstagePassGoods() {
         if(sellIn > 10) {
-            quality += 2;
+            increasePrice(quality, 2);
         } else if(sellIn > 0 && sellIn < 5) {
-            quality += 3;
+            increasePrice(quality, 3);
         } else {
             quality = 0;
         }
@@ -35,9 +45,9 @@ public class GildedRose {
 
     private void updateNormalGoods() {
         if(sellIn >= 0) {
-            quality -= 1;
+            decreasePrice(quality, 1);
         } else {
-            quality -= 2;
+            decreasePrice(quality, 2);
         }
     }
 
