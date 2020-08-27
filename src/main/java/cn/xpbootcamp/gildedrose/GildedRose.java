@@ -17,14 +17,6 @@ public class GildedRose {
         return quality;
     }
 
-    public int getUpdatedSellIn() {
-        return sellIn;
-    }
-
-    public GoodsType getGoodsType() {
-        return type;
-    }
-
     private void increasePrice(int quality, int diff) {
         this.quality = Math.min(quality + diff, MAX_QUALITY);
     }
