@@ -1,0 +1,37 @@
+1. Given 普通商品,保质期内, When 按天更新价值, Then 价值下滑一个点
+Given normal; sellIn = 10; quality = 10
+When 更新
+Then quality = 9
+
+2. Given 普通商品,已过期, When 按天更新价值, Then 价值下滑两个点
+Given normal; sellIn = -1; quality = 10
+When 更新
+Then quality = 8
+
+3. Given 后台门票,距离演出10天以上, When 按天更新价值, Then 价值上升一个点
+Given backstage pass; sellIn = 13; quality = 10;
+When 更新
+Then quality = 11;
+
+4. Given 后台门票,距离演出5-10天, When 按天更新价值, Then 价值上升两个点
+Given backstage pass; sellIn = 10; quality = 10;
+When 更新
+Then quality = 12;
+
+Given backstage pass; sellIn = 8; quality = 10;
+When 更新
+Then quality = 12;
+
+5. Given 后台门票,距离演出不到5天, When 按天更新价值, Then 价值上升三个点
+Given backstage pass; sellIn = 5; quality = 10;
+When 更新
+Then quality = 13;
+
+Given backstage pass; sellIn = 3; quality = 10;
+When 更新
+Then quality = 13;
+
+6. Given 后台门票,已经过了演出日, When 按天更新价值, Then 价值变为0点
+Given backstage pass; sellIn = -1; quality = 10;
+When 更新
+Then quality = 0;
